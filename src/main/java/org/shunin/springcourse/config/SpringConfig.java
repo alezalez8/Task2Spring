@@ -1,4 +1,4 @@
-package ru.alishev.springcourse.config;
+package org.shunin.springcourse.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -63,7 +63,7 @@ public class SpringConfig implements WebMvcConfigurer {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/project1");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/project2");
         dataSource.setUsername("postgres");
         dataSource.setPassword("postgres");
 

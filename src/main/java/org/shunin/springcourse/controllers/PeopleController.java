@@ -1,13 +1,13 @@
-package ru.alishev.springcourse.controllers;
+package org.shunin.springcourse.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.alishev.springcourse.dao.PersonDAO;
-import ru.alishev.springcourse.models.Person;
-import ru.alishev.springcourse.util.PersonValidator;
+import org.shunin.springcourse.dao.PersonDAO;
+import org.shunin.springcourse.models.Person;
+import org.shunin.springcourse.util.PersonValidator;
 
 import javax.validation.Valid;
 
