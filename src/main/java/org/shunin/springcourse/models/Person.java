@@ -1,7 +1,6 @@
 package org.shunin.springcourse.models;
 
 import org.hibernate.annotations.Cascade;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -35,13 +34,21 @@ public class Person {
     public Person() {
     }
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "owner")
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Book> books;
 
     public Person(String fullName, int yearOfBirth) {
         this.fullName = fullName;
         this.yearOfBirth = yearOfBirth;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
     public int getId() {

@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 /**
  * @author Neil Alishev
@@ -36,7 +35,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
-    private Person person;
+    private Person owner;
 
     public Book() {
 
@@ -46,6 +45,14 @@ public class Book {
         this.title = title;
         this.author = author;
         this.year = year;
+    }
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person person) {
+        this.owner = person;
     }
 
     public int getId() {
