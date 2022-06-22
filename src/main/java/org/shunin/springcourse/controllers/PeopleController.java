@@ -17,21 +17,18 @@ import javax.validation.Valid;
 @RequestMapping("/people")
 public class PeopleController {
 
-   // private final PersonDAO personDAO;
    // private final PersonValidator personValidator;
     private final PersonService personService;
 
     @Autowired
     public PeopleController( PersonService personService) {
-
        // this.personValidator = personValidator;
         this.personService = personService;
     }
 
     @GetMapping()
     public String index(Model model) {
-       // model.addAttribute("people", personDAO.index());
-        model.addAttribute("people", personService.findAll());
+        model.addAttribute("people", personService.index());
         return "people/index";
     }
 
@@ -40,9 +37,9 @@ public class PeopleController {
       //  model.addAttribute("person", personDAO.show(id));
        // model.addAttribute("books", personDAO.getBooksByPersonId(id));
         model.addAttribute("person", personService.findById(id));
-
         return "people/show";
     }
+
 
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person) {
@@ -57,14 +54,15 @@ public class PeopleController {
         if (bindingResult.hasErrors())
             return "people/new";
 //===============================
-      //  personDAO.save(person);
+        personService.save(person);
         return "redirect:/people";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         //===============================
-        //model.addAttribute("person", personDAO.show(id));
+        model.addAttribute("person", personService.findById(id));
+
         return "people/edit";
     }
 
@@ -75,6 +73,7 @@ public class PeopleController {
             return "people/edit";
 //===============================
        // personDAO.update(id, person);
+        personService.save(person);
         return "redirect:/people";
     }
 
@@ -82,6 +81,7 @@ public class PeopleController {
     public String delete(@PathVariable("id") int id) {
         //===============================
        // personDAO.delete(id);
+        personService.delete(id);
         return "redirect:/people";
     }
 }

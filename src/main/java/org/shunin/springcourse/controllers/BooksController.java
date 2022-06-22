@@ -1,6 +1,7 @@
 package org.shunin.springcourse.controllers;
 
 import org.shunin.springcourse.service.BookService;
+import org.shunin.springcourse.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.shunin.springcourse.models.Book;
 import org.shunin.springcourse.models.Person;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 /**
  * @author Neil Alishev
@@ -20,28 +22,30 @@ public class BooksController {
 
 
     private final BookService bookService;
+    private final PersonService personService;
 
     @Autowired
-    public BooksController(BookService bookService) {
+    public BooksController(BookService bookService, PersonService personService) {
         this.bookService = bookService;
+        this.personService = personService;
     }
 
     @GetMapping()
     public String index(Model model) {
-      //  model.addAttribute("books", bookDAO.index());
+       model.addAttribute("books", bookService.index());
         return "books/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
-      //  model.addAttribute("book", bookDAO.show(id));
+       model.addAttribute("book", bookService.show(id));
 
-      //  Optional<Person> bookOwner = bookDAO.getBookOwner(id);
+        Optional<Person> bookOwner = personService.getBookOwner(id);
 
-        /*if (bookOwner.isPresent())
-          //            model.addAttribute("owner", bookOwner.get());
-          //        else
-          //          //  model.addAttribute("people", personDAO.index());*/
+        if (bookOwner.isPresent())
+                    model.addAttribute("owner", bookOwner.get());
+                 else
+                  model.addAttribute("people", personService.index());
 
         return "books/show";
     }

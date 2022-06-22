@@ -33,9 +33,17 @@ public class Book {
     private int year;
 
 
+
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person owner;
+
+
+
+    @Column(name = "person_id", insertable = false, updatable = false)
+    private int forId;
+
+
 
     public Book() {
 
@@ -45,6 +53,14 @@ public class Book {
         this.title = title;
         this.author = author;
         this.year = year;
+    }
+
+    public int getForId() {
+        return forId;
+    }
+
+    public void setForId(int forId) {
+        this.forId = forId;
     }
 
     public Person getOwner() {
